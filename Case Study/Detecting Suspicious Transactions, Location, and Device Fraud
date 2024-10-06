@@ -1,1 +1,10 @@
+# 🧑‍💻👩‍💻 Case Study: Bank Fraud Detection
 
+## Detecting Suspicious Transactions, Location, and Device Fraud
+
+This section covers a series of SQL-based questions aimed at detecting suspicious transactions, location, and device fraud in the bank database. Each question is followed by the corresponding SQL query and its output.
+
+---
+
+
+### **1. What are the top 10 largest transactions in the database?**
