@@ -51,13 +51,11 @@ To better understand the relationships between the different entities in this ca
 
 ## 5. Case Study Solutions
 
-This section will cover two detailed case study solutions that were solved using SQL-based analysis.
+This section will cover the detailed case study solutions that were solved using SQL-based analysis.
 
-### [1. Identifying Suspicious Transactions](./solution1.sql)
-In this analysis, we focus on detecting suspicious transactions that may be indicative of fraudulent activities such as unusually large transactions or discrepancies in the locations/devices used.
+### [Detecting Suspicious Transactions, Location, and Device Fraud](https://github.com/MuhammadSheryar18/Bank_Fraud_Detection)
+In this analysis, we focus on detecting suspicious transactions that may be indicative of fraudulent activities such as unusually large transactions or discrepancies in the locations/devices used. This analysis investigates discrepancies in the locations and devices used to perform transactions, identifying potential patterns of fraud.
 
-### [2. Detecting Location and Device Fraud](./solution2.sql)
-This analysis investigates discrepancies in the locations and devices used to perform transactions, identifying potential patterns of fraud.
 
 ---
 
