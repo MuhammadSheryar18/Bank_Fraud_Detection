@@ -53,7 +53,7 @@ To better understand the relationships between the different entities in this ca
 
 This section will cover the detailed case study solutions that were solved using SQL-based analysis.
 
-### [Detecting Suspicious Transactions, Location, and Device Fraud](https://github.com/MuhammadSheryar18/Bank_Fraud_Detection/blob/main/Case%20Study/Detecting%20Suspicious%20Transactions%2C%20Location%2C%20and%20Device%20Fraud)
+### [Detecting Suspicious Transactions, Location, and Device Fraud](https://github.com/MuhammadSheryar18/Bank_Fraud_Detection/blob/main/Case%20Study/Detecting%20Suspicious%20Transactions%2C%20Location%2C%20and%20Device%20Fraud.md)
 In this analysis, we focus on detecting suspicious transactions that may be indicative of fraudulent activities such as unusually large transactions or discrepancies in the locations/devices used. This analysis investigates discrepancies in the locations and devices used to perform transactions, identifying potential patterns of fraud.
 
 
