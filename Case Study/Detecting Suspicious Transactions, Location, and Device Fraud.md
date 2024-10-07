@@ -20,9 +20,8 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
+    ```sql
     SELECT * FROM transactions ORDER BY amount DESC LIMIT 10;
-
     ```
 
 - **Query Output:**
