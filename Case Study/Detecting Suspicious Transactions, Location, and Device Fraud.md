@@ -39,11 +39,10 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
     COUNT(DISTINCT transaction_id) AS transaction_count, 
     MIN(transaction_time_date) AS first_transaction_date,
     MAX(transaction_time_date) AS last_transaction_date
-FROM transactions
-WHERE transaction_time_date >= NOW() - INTERVAL 30 DAY
-GROUP BY account_id
-ORDER BY transaction_count DESC;
-
+    FROM transactions
+    WHERE transaction_time_date >= NOW() - INTERVAL 30 DAY
+    GROUP BY account_id
+    ORDER BY transaction_count DESC;
     ```
 
 - **Query Output:**
@@ -59,9 +58,8 @@ ORDER BY transaction_count DESC;
 
     ```sql
     SELECT transaction_type, AVG(amount) 
-FROM transactions 
-GROUP BY transaction_type;
-
+    FROM transactions 
+    GROUP BY transaction_type;
     ```
 
 - **Query Output:**
@@ -78,19 +76,17 @@ GROUP BY transaction_type;
     ```sql
     WITH usual_location AS (
     SELECT account_id, location, COUNT(*) AS location_count,
-        ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
+    ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
     FROM transactions
-    GROUP BY account_id, location
-)
-
-SELECT t.transaction_id, t.account_id, t.location AS transaction_location, ul.location AS usual_location
-FROM transactions t
-JOIN 
+    GROUP BY account_id, location)
+    SELECT t.transaction_id, t.account_id, t.location AS transaction_location, ul.location AS usual_location
+    FROM transactions t
+    JOIN 
     (SELECT account_id, location 
-     FROM usual_location
-     WHERE row_num = 1) ul 
-     ON t.account_id = ul.account_id
-WHERE t.location != ul.location;
+    FROM usual_location
+    WHERE row_num = 1) ul 
+    ON t.account_id = ul.account_id
+    WHERE t.location != ul.location;
     ```
 
 - **Query Output:**
@@ -105,8 +101,8 @@ WHERE t.location != ul.location;
 
     ```sql
     SELECT device_used, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM transactions) AS percentage 
-FROM transactions 
-GROUP BY device_used;
+    FROM transactions 
+    GROUP BY device_used;
     ```
 
 - **Query Output:**
@@ -122,18 +118,17 @@ GROUP BY device_used;
     ```sql
     WITH usual_location AS (
     SELECT account_id, location, COUNT(*) AS location_count,
-        ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
+    ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
     FROM transactions
-    GROUP BY account_id, location
-)
-SELECT t.device_used, t.location AS transaction_location, ul.location AS usual_location
-FROM transactions t
-JOIN 
+    GROUP BY account_id, location)
+    SELECT t.device_used, t.location AS transaction_location, ul.location AS usual_location
+    FROM transactions t
+    JOIN 
     (SELECT account_id, location 
-     FROM usual_location
-     WHERE row_num = 1) ul 
-     ON t.account_id = ul.account_id
-WHERE t.location != ul.location;
+    FROM usual_location
+    WHERE row_num = 1) ul 
+    ON t.account_id = ul.account_id
+    WHERE t.location != ul.location;
     ```
 
 - **Query Output:**
