@@ -34,8 +34,15 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
-    ![Q2](https://github.com/user-attachments/assets/ca065063-4f5a-4cd0-a212-5dd4d9e3d0fb)
+    ```sql
+    SELECT account_id, 
+    COUNT(DISTINCT transaction_id) AS transaction_count, 
+    MIN(transaction_time_date) AS first_transaction_date,
+    MAX(transaction_time_date) AS last_transaction_date
+FROM transactions
+WHERE transaction_time_date >= NOW() - INTERVAL 30 DAY
+GROUP BY account_id
+ORDER BY transaction_count DESC;
 
     ```
 
@@ -50,8 +57,10 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
-    ![Q3](https://github.com/user-attachments/assets/15784dd9-0789-4c48-9f84-c660ea29f54a)
+    ```sql
+    SELECT transaction_type, AVG(amount) 
+FROM transactions 
+GROUP BY transaction_type;
 
     ```
 
@@ -66,9 +75,22 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
-    ![Q4](https://github.com/user-attachments/assets/f5e9d90f-e7c7-4e61-908a-f043ae9dae7b)
+    ```sql
+    WITH usual_location AS (
+    SELECT account_id, location, COUNT(*) AS location_count,
+        ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
+    FROM transactions
+    GROUP BY account_id, location
+)
 
+SELECT t.transaction_id, t.account_id, t.location AS transaction_location, ul.location AS usual_location
+FROM transactions t
+JOIN 
+    (SELECT account_id, location 
+     FROM usual_location
+     WHERE row_num = 1) ul 
+     ON t.account_id = ul.account_id
+WHERE t.location != ul.location;
     ```
 
 - **Query Output:**
@@ -81,9 +103,10 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
-    ![Q5](https://github.com/user-attachments/assets/4d71003d-73fc-49b8-8a66-836fb71509b7)
-
+    ```sql
+    SELECT device_used, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM transactions) AS percentage 
+FROM transactions 
+GROUP BY device_used;
     ```
 
 - **Query Output:**
@@ -96,9 +119,21 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 - **SQL Query:**
 
-    ```
-    ![Q6](https://github.com/user-attachments/assets/6b44a46d-2b0f-4e79-93e0-e98ee9bce7ed)
-
+    ```sql
+    WITH usual_location AS (
+    SELECT account_id, location, COUNT(*) AS location_count,
+        ROW_NUMBER() OVER (PARTITION BY account_id ORDER BY COUNT(*) DESC) AS row_num
+    FROM transactions
+    GROUP BY account_id, location
+)
+SELECT t.device_used, t.location AS transaction_location, ul.location AS usual_location
+FROM transactions t
+JOIN 
+    (SELECT account_id, location 
+     FROM usual_location
+     WHERE row_num = 1) ul 
+     ON t.account_id = ul.account_id
+WHERE t.location != ul.location;
     ```
 
 - **Query Output:**
