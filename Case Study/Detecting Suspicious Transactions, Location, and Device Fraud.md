@@ -21,7 +21,7 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 - **SQL Query:**
 
     ```
-    ![q1](https://github.com/user-attachments/assets/887d5424-e436-4b98-87a3-fa279a90f5e0)
+    SELECT * FROM transactions ORDER BY amount DESC LIMIT 10;
 
     ```
 
