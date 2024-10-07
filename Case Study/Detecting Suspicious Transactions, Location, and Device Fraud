@@ -1,4 +1,4 @@
-# 🧑‍💻👩‍💻 Case Study: Bank Fraud Detection
+# Case Study: Bank Fraud Detection
 
 ## Detecting Suspicious Transactions, Location, and Device Fraud
 
@@ -6,7 +6,26 @@ This section covers a series of SQL-based questions aimed at detecting suspiciou
 
 ---
 
-### **1. What are the top 10 largest transactions in the database?**
+### 1. What are the top 10 largest transactions in the database?
 
-```sql
--- SQL query for top 10 largest transactions
+---
+
+### 2. Which accounts have the most frequent transactions in the last 30 days?
+
+---
+
+### 3. What is the average transaction amount by transaction type (Deposit, Withdrawal, Transfer)?
+
+---
+
+### 4. Which transactions were made from locations that differ from the account holder's usual location?
+
+---
+
+### 5. What percentage of transactions were performed from mobile devices vs. ATMs?
+
+---
+
+### 6. Which devices have been used for transactions outside the usual geographical regions of the account holders?
+
+---
